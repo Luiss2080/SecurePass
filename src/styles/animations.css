@@ -1,0 +1,60 @@
+@layer utilities {
+  /* Animaciones personalizadas */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes initialLoad {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+  .animate-slideIn { animation: slideIn 0.4s ease-out; }
+  .animate-slideUp { animation: slideUp 0.6s ease-out; }
+  .animate-scaleIn { animation: scaleIn 0.3s ease-out; }
+  .animate-shimmer { animation: shimmer 2s infinite; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-wiggle { animation: wiggle 0.5s ease-in-out infinite; }
+  .animate-gradient { background-size: 200% 200%; animation: gradient 15s ease infinite; }
+  
+  .animation-delay-500 { animation-delay: 0.5s; }
+  .animation-delay-2000 { animation-delay: 2s; }
+}

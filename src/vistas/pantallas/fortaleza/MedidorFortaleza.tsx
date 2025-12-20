@@ -1,5 +1,5 @@
 import { FortalezaContrasena } from '../../../tipos/contrasena.tipos';
-import BarraFortaleza from '../medidores/BarraFortaleza';
+import BarraFortaleza from '../../componentes/medidores/BarraFortaleza';
 
 interface PropiedadesMedidorFortaleza {
   fortaleza: FortalezaContrasena;
