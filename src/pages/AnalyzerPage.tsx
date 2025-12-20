@@ -56,9 +56,9 @@ export default function AnalyzerPage() {
         {/* Columna Izquierda: Input y Métricas Principales */}
         <div className="lg:col-span-7 space-y-6">
           {/* Panel de Input */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 space-y-6">
+          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 space-y-6">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-bold text-gray-700">
                 Escribe una contraseña para analizar
               </label>
               <div className="relative group">
@@ -66,12 +66,12 @@ export default function AnalyzerPage() {
                   type={showPassword ? "text" : "password"}
                   value={inputPassword}
                   onChange={(e) => setInputPassword(e.target.value)}
-                  className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl text-lg font-mono focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all group-hover:bg-white"
+                  className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl text-lg font-mono focus:ring-4 focus:ring-blue-50 focus:border-blue-200 outline-none transition-all group-hover:bg-white"
                   placeholder="Escribe aquí..."
                 />
                 <button
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1 rounded-md hover:bg-gray-100 transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-2 rounded-xl hover:bg-gray-100 transition-colors"
                 >
                   {showPassword ? (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,21 +92,21 @@ export default function AnalyzerPage() {
 
           {/* Tarjetas de Métricas Avanzadas */}
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-              <div className="text-gray-500 text-sm font-medium mb-1">Entropía</div>
-              <div className="text-2xl font-bold text-gray-900">
-                {metrics.entropy.toFixed(1)} <span className="text-sm font-normal text-gray-400">bits</span>
+            <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-gray-500 text-sm font-bold mb-2">Entropía</div>
+              <div className="text-3xl font-bold text-gray-900 tracking-tight">
+                {metrics.entropy.toFixed(1)} <span className="text-base font-normal text-gray-400">bits</span>
               </div>
-              <div className="text-xs text-gray-400 mt-2">
+              <div className="text-xs text-gray-400 mt-2 font-medium">
                 Medida de imprevisibilidad matemática.
               </div>
             </div>
-            <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-              <div className="text-gray-500 text-sm font-medium mb-1">Caracteres Únicos</div>
-              <div className="text-2xl font-bold text-gray-900">
+            <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-gray-500 text-sm font-bold mb-2">Caracteres Únicos</div>
+              <div className="text-3xl font-bold text-gray-900 tracking-tight">
                 {metrics.poolSize}
               </div>
-              <div className="text-xs text-gray-400 mt-2">
+              <div className="text-xs text-gray-400 mt-2 font-medium">
                 Tamaño del pool de caracteres usados.
               </div>
             </div>
@@ -115,23 +115,27 @@ export default function AnalyzerPage() {
 
         {/* Columna Derecha: Tiempo y Recomendaciones */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 text-white shadow-xl ring-1 ring-white/10">
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-              <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+          <div className="bg-gray-900 rounded-3xl p-8 text-white shadow-xl ring-1 ring-white/10 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-16 -mt-16"></div>
+            
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2 relative z-10">
+              <div className="p-1.5 bg-white/10 rounded-lg">
+                <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
               Tiempo para Hackear
             </h3>
-            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400 mb-2">
+            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400 mb-2 relative z-10">
               {inputPassword ? getCrackTime(metrics.attempts) : '---'}
             </div>
-            <p className="text-gray-400 text-sm border-t border-white/10 pt-4 mt-4">
-              Estimación basada en un ataque de fuerza bruta offline con hardware de última generación (RTX 4090 farm).
+            <p className="text-gray-400 text-sm border-t border-white/10 pt-4 mt-4 relative z-10">
+              Estimación basada en un ataque de fuerza bruta offline con hardware de última generación.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
-            <h3 className="font-bold text-gray-900 mb-4">Checklist de Seguridad</h3>
+          <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+            <h3 className="font-bold text-gray-900 mb-6">Checklist de Seguridad</h3>
             <ul className="space-y-4">
               <CheckItem 
                 label="Longitud Segura (12+)" 
@@ -158,21 +162,21 @@ export default function AnalyzerPage() {
 
 function CheckItem({ label, passed, info }: { label: string, passed: boolean, info: string }) {
   return (
-    <li className="flex items-start gap-3">
-      <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${passed ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400'}`}>
+    <li className="flex items-start gap-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors">
+      <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors ${passed ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400'}`}>
         {passed ? (
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
           </svg>
         ) : (
-          <div className="w-1.5 h-1.5 rounded-full bg-current" />
+          <div className="w-2 h-2 rounded-full bg-current" />
         )}
       </div>
       <div>
-        <span className={`text-sm font-medium block ${passed ? 'text-gray-900' : 'text-gray-500'}`}>
+        <span className={`text-sm font-bold block ${passed ? 'text-gray-900' : 'text-gray-500'}`}>
           {label}
         </span>
-        <span className="text-xs text-gray-400">
+        <span className="text-xs text-gray-400 font-medium">
           {info}
         </span>
       </div>

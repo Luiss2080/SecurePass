@@ -36,7 +36,7 @@ export default function SettingsPage() {
           Configuración
         </h1>
         <p className="text-gray-500 mt-2 text-lg">
-          Personaliza el comportamiento de SecurePass.
+          Personaliza tu experiencia en SecurePass.
         </p>
       </div>
 
@@ -82,11 +82,11 @@ export default function SettingsPage() {
             onChange={(checked) => saveSettings('darkMode', checked)}
           />
           <div className="pt-2">
-            <div className="text-sm font-medium text-gray-900 mb-2">Tema</div>
-            <div className="flex gap-2">
-              <div className="w-8 h-8 rounded-full bg-blue-600 ring-2 ring-offset-2 ring-blue-600 cursor-pointer"></div>
-              <div className="w-8 h-8 rounded-full bg-purple-600 cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-purple-600 transition-all"></div>
-              <div className="w-8 h-8 rounded-full bg-emerald-600 cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-emerald-600 transition-all"></div>
+            <div className="text-sm font-medium text-gray-900 mb-3">Tema de Acento</div>
+            <div className="flex gap-3">
+              <div className="w-10 h-10 rounded-full bg-blue-500 ring-4 ring-blue-100 cursor-pointer transition-transform hover:scale-110"></div>
+              <div className="w-10 h-10 rounded-full bg-purple-500 cursor-pointer hover:ring-4 hover:ring-purple-100 transition-all hover:scale-110"></div>
+              <div className="w-10 h-10 rounded-full bg-emerald-500 cursor-pointer hover:ring-4 hover:ring-emerald-100 transition-all hover:scale-110"></div>
             </div>
           </div>
         </SettingsCard>
@@ -100,19 +100,28 @@ export default function SettingsPage() {
             </svg>
           }
         >
-          <div className="p-4 bg-gray-50 rounded-lg border border-gray-100 mb-4">
-            <div className="text-sm font-medium text-gray-900">Usuario Local</div>
-            <div className="text-xs text-gray-500">Los datos se guardan en tu navegador.</div>
+          <div className="p-4 bg-gray-50 rounded-xl border border-gray-100 mb-4">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-xs font-bold">UD</div>
+              <div>
+                <div className="text-sm font-bold text-gray-900">Usuario Demo</div>
+                <div className="text-xs text-gray-500">Plan Gratuito</div>
+              </div>
+            </div>
+            <div className="text-xs text-gray-400 mt-2">Los datos se guardan localmente en tu navegador.</div>
           </div>
-          <button className="w-full py-2 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+          <button className="w-full py-2.5 px-4 border border-gray-200 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors flex items-center justify-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
             Exportar mis datos
           </button>
         </SettingsCard>
       </div>
       
       <div className="border-t border-gray-100 pt-8 text-center">
-        <p className="text-sm text-gray-400">
-          SecurePass v1.0.0 &bull; Desarrollado con seguridad en mente
+        <p className="text-sm text-gray-400 font-medium">
+          SecurePass v1.0.0 &bull; 2025
         </p>
       </div>
     </div>
@@ -121,12 +130,12 @@ export default function SettingsPage() {
 
 function SettingsCard({ title, icon, children }: { title: string, icon: React.ReactNode, children: React.ReactNode }) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-full">
-      <div className="p-6 border-b border-gray-100 flex items-center gap-3 bg-gray-50/50">
-        <div className="text-gray-400">
+    <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-full hover:shadow-md transition-shadow duration-300">
+      <div className="p-6 border-b border-gray-50 flex items-center gap-4">
+        <div className="p-2 bg-blue-50 text-blue-600 rounded-xl">
           {icon}
         </div>
-        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+        <h3 className="text-lg font-bold text-gray-900">{title}</h3>
       </div>
       <div className="p-6 space-y-6 flex-grow">
         {children}
@@ -145,8 +154,8 @@ function ToggleItem({ label, description, checked, onChange, disabled = false }:
   return (
     <div className={`flex items-start justify-between ${disabled ? 'opacity-50 pointer-events-none' : ''}`}>
       <div className="space-y-0.5">
-        <div className="text-sm font-medium text-gray-900">{label}</div>
-        <div className="text-xs text-gray-500">{description}</div>
+        <div className="text-sm font-bold text-gray-900">{label}</div>
+        <div className="text-xs text-gray-500 font-medium">{description}</div>
       </div>
       <label className="relative inline-flex items-center cursor-pointer shrink-0 ml-4">
         <input 
@@ -156,7 +165,7 @@ function ToggleItem({ label, description, checked, onChange, disabled = false }:
           disabled={disabled}
           onChange={(e) => onChange(e.target.checked)}
         />
-        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
       </label>
     </div>
   );
