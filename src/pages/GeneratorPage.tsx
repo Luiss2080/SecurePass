@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePasswordGenerator } from '../hooks/usePasswordGenerator';
+import { useHistory } from '../hooks/useHistory';
 import PasswordDisplay from '../components/password/PasswordDisplay';
 import PasswordOptionsPanel from '../components/password/PasswordOptionsPanel';
 import StrengthMeter from '../components/password/StrengthMeter';
@@ -20,10 +21,21 @@ export default function GeneratorPage() {
     updateOptions,
   } = usePasswordGenerator();
 
+  const { addToHistory } = useHistory();
+  const lastSavedPassword = useRef('');
+
   // Generar contraseña inicial al montar el componente
   useEffect(() => {
     generateNewPassword();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Guardar en historial cuando se genera una nueva contraseña válida
+  useEffect(() => {
+    if (password && password !== lastSavedPassword.current) {
+      addToHistory(password, passwordStrength.score);
+      lastSavedPassword.current = password;
+    }
+  }, [password, passwordStrength, addToHistory]);
 
   return (
     <div className="space-y-8">
