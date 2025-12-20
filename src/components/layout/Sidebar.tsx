@@ -9,8 +9,8 @@ export default function Sidebar() {
 
   const isActive = (path: string) => {
     return location.pathname === path 
-      ? 'bg-blue-50 text-blue-600 shadow-sm' 
-      : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50';
+      ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50' 
+      : 'text-slate-400 hover:text-white hover:bg-white/5';
   };
 
   const navItems = [
@@ -54,23 +54,23 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="h-full flex flex-col py-8 px-6 border-r border-gray-100 bg-white/50">
+    <aside className="h-full flex flex-col py-8 px-6 border-r border-slate-800 bg-slate-900 text-white">
       {/* Logo Area */}
       <div className="mb-10 px-2 flex items-center gap-3">
-        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
           </svg>
         </div>
         <div>
-          <h1 className="text-xl font-bold text-gray-900 tracking-tight">SecurePass</h1>
-          <p className="text-xs text-gray-500 font-medium">Pro Security</p>
+          <h1 className="text-xl font-bold text-white tracking-tight">SecurePass</h1>
+          <p className="text-xs text-slate-400 font-medium">Pro Security</p>
         </div>
       </div>
 
       {/* Navigation Links */}
       <nav className="flex-1 space-y-1">
-        <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-3">
+        <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 px-3">
           Menu
         </div>
         
@@ -85,7 +85,7 @@ export default function Sidebar() {
           </Link>
         ))}
 
-        <div className="mt-8 text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-3">
+        <div className="mt-8 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 px-3">
           Otros
         </div>
         

@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/layout/Sidebar';
 import RightSidebar from '../components/layout/RightSidebar';
 import TopBar from '../components/layout/TopBar';
+import Footer from '../components/layout/Footer';
 
 /**
  * Layout "Floating Dashboard"
@@ -18,11 +19,13 @@ export default function MainLayout() {
         <div className="flex flex-col min-w-0 bg-white/50 relative">
           <TopBar />
           
-          <main className="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8">
-            <div className="max-w-4xl mx-auto w-full">
+          <main className="flex-1 overflow-y-auto custom-scrollbar px-6 pb-6">
+            <div className="w-full max-w-[98%] mx-auto">
               <Outlet />
             </div>
           </main>
+
+          <Footer />
         </div>
 
         {/* Columna Derecha: Panel Lateral */}
