@@ -6,10 +6,10 @@ import PasswordOptionsPanel from '../components/password/PasswordOptionsPanel';
 import StrengthMeter from '../components/password/StrengthMeter';
 import CopyButton from '../components/ui/CopyButton';
 import GenerateButton from '../components/ui/GenerateButton';
-import SecurityTips from '../components/layout/SecurityTips';
 
 /**
  * Página principal: Generador de Contraseñas
+ * Estilo Hero Dashboard
  */
 export default function GeneratorPage() {
   const {
@@ -38,70 +38,88 @@ export default function GeneratorPage() {
   }, [password, passwordStrength, addToHistory]);
 
   return (
-    <div className="space-y-8">
-      {/* Encabezado de la página */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-          Generador de Contraseñas
-        </h1>
-        <p className="text-gray-500 mt-2 text-lg">
-          Crea credenciales robustas y seguras en segundos.
-        </p>
-      </div>
-
-      <div className="grid lg:grid-cols-3 gap-8">
-        {/* Columna Principal: Generador */}
-        <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 space-y-8">
-            {/* Display y Fuerza */}
-            <div className="space-y-6">
-              <PasswordDisplay 
-                password={password} 
-                strength={passwordStrength.level}
+    <div className="space-y-8 animate-fadeIn">
+      
+      {/* Hero Banner Card */}
+      <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-r from-blue-600 to-indigo-600 p-10 text-white shadow-xl shadow-blue-200">
+        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl"></div>
+        
+        <div className="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+          <div className="space-y-4">
+            <span className="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-bold tracking-wide backdrop-blur-sm border border-white/10">
+              SEGURIDAD PRO
+            </span>
+            <h1 className="text-4xl font-bold leading-tight">
+              Genera contraseñas <br/>
+              <span className="text-blue-200">invencibles</span> al instante.
+            </h1>
+            <p className="text-blue-100 max-w-md">
+              Utiliza algoritmos criptográficos avanzados para proteger tus cuentas contra ataques de fuerza bruta.
+            </p>
+            
+            <div className="pt-4">
+              <GenerateButton 
+                onClick={generateNewPassword}
+                isGenerating={isGenerating}
+                variant="white" // Need to ensure this variant exists or style manually
               />
-              <StrengthMeter strength={passwordStrength} />
-            </div>
-
-            {/* Acciones */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-100">
-              <div className="flex-1">
-                <GenerateButton 
-                  onClick={generateNewPassword}
-                  isGenerating={isGenerating}
-                />
-              </div>
-              <div className="sm:w-auto">
-                <CopyButton text={password} disabled={!password} />
-              </div>
             </div>
           </div>
 
-          {/* Panel de Configuración separado visualmente */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
-              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              Configuración Avanzada
-            </h3>
-            <PasswordOptionsPanel 
-              options={options} 
-              onOptionsChange={updateOptions} 
-            />
+          {/* Password Display embedded in Hero */}
+          <div className="bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20 shadow-inner">
+            <div className="text-xs font-bold text-blue-200 uppercase tracking-wider mb-2">Tu nueva contraseña</div>
+            <div className="text-3xl font-mono font-bold break-all tracking-wider text-white mb-4">
+              {password}
+            </div>
+            <div className="flex items-center justify-between">
+               <div className="flex gap-2">
+                 {[...Array(4)].map((_, i) => (
+                   <div key={i} className={`h-2 w-8 rounded-full ${i < passwordStrength.score ? 'bg-green-400' : 'bg-white/20'}`}></div>
+                 ))}
+               </div>
+               <CopyButton text={password} disabled={!password} variant="icon-white" />
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Columna Lateral: Consejos e Info */}
+      {/* Configuration Section */}
+      <div className="grid lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+           <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
+             <h3 className="text-lg font-bold text-gray-900 mb-6">Personalización</h3>
+             <PasswordOptionsPanel 
+                options={options} 
+                onOptionsChange={updateOptions} 
+             />
+           </div>
+        </div>
+
+        {/* Mini Stats Card */}
         <div className="space-y-6">
-          <SecurityTips />
-          
-          {/* Widget adicional de estado */}
-          <div className="bg-gradient-to-br from-primary to-blue-600 rounded-2xl p-6 text-white shadow-lg">
-            <h3 className="font-bold text-lg mb-2">¿Sabías qué?</h3>
-            <p className="text-blue-100 text-sm leading-relaxed">
-              Una contraseña de 12 caracteres con números y símbolos tardaría 34,000 años en ser descifrada por una computadora actual.
-            </p>
+          <div className="bg-orange-50 rounded-3xl p-6 border border-orange-100">
+             <div className="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-500 mb-4">
+               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+               </svg>
+             </div>
+             <div className="text-2xl font-bold text-gray-900">{passwordStrength.score}/4</div>
+             <div className="text-sm text-gray-500 font-medium">Nivel de Fortaleza</div>
+             <div className="mt-4 h-2 bg-orange-100 rounded-full overflow-hidden">
+               <div className="h-full bg-orange-500 rounded-full" style={{ width: `${(passwordStrength.score/4)*100}%` }}></div>
+             </div>
+          </div>
+
+          <div className="bg-blue-50 rounded-3xl p-6 border border-blue-100">
+             <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-500 mb-4">
+               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+               </svg>
+             </div>
+             <div className="text-2xl font-bold text-gray-900">0.02s</div>
+             <div className="text-sm text-gray-500 font-medium">Tiempo de generación</div>
           </div>
         </div>
       </div>

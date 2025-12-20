@@ -2,26 +2,29 @@ interface GenerateButtonProps {
   onClick: () => void;
   isGenerating: boolean;
   disabled?: boolean;
+  variant?: 'default' | 'white';
 }
 
 /**
  * Botón principal para generar contraseñas con animaciones
  */
-export default function GenerateButton({ onClick, isGenerating, disabled = false }: GenerateButtonProps) {
+export default function GenerateButton({ onClick, isGenerating, disabled = false, variant = 'default' }: GenerateButtonProps) {
+  const variantClasses = variant === 'white'
+    ? 'bg-white text-blue-600 hover:bg-blue-50 shadow-md hover:shadow-lg'
+    : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl';
+
   return (
     <button
       onClick={onClick}
       disabled={disabled || isGenerating}
       className={`
-        flex-1 flex items-center justify-center gap-3 
-        bg-gradient-to-r from-purple-600 to-pink-600 
-        hover:from-purple-700 hover:to-pink-700
-        text-white font-bold py-4 px-6 rounded-xl
+        flex items-center justify-center gap-3 
+        font-bold py-3 px-6 rounded-xl
         transition-all duration-200 transform
         hover:scale-105 active:scale-95
-        shadow-lg hover:shadow-xl
         disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
         group
+        ${variantClasses}
       `}
     >
       <svg 

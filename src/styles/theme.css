@@ -1,43 +1,69 @@
-@theme {
-  --color-border: hsl(var(--border));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-sidebar: hsl(var(--sidebar));
-  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+:root {
+  /* Brand Colors - Modern Blue/Indigo */
+  --color-primary: 59, 130, 246; /* Blue 500 */
+  --color-secondary: 99, 102, 241; /* Indigo 500 */
+  --color-accent: 14, 165, 233; /* Sky 500 */
+  
+  /* Backgrounds */
+  --bg-page: #f0f4f8; /* Fallback */
+  --bg-card: #ffffff;
+  
+  /* Text */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-tertiary: #94a3b8;
+  
+  /* Borders */
+  --border-color: #e2e8f0;
+  
+  /* Border Radius */
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.5rem;
 }
 
-:root {
-  /* Fondo general gris muy suave para limpieza */
-  --background: 210 20% 98%;
-  --foreground: 222 47% 11%;
+@layer base {
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    overflow-x: hidden;
+  }
+}
 
-  /* Azul pizarra profesional para acentos principales */
-  --primary: 221 83% 53%; /* #2563EB - Azul vibrante pero serio */
-  --primary-foreground: 210 40% 98%;
+/* Custom Utilities for the "Floating Card" look */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
 
-  /* Tonos neutros para elementos secundarios */
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222 47% 11.2%;
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-3xl);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  width: 100%;
+  max-width: 1600px;
+  height: 90vh; /* Fixed height for the dashboard look */
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  overflow: hidden;
+}
 
-  /* Acentos sutiles */
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222 47% 11.2%;
-
-  /* Tarjetas blancas limpias */
-  --card: 0 0% 100%;
-  --card-foreground: 222 47% 11.2%;
-
-  /* Sidebar oscuro elegante */
-  --sidebar: 222 47% 11%;
-  --sidebar-foreground: 210 40% 98%;
-
-  --border: 214.3 31.8% 91.4%;
+/* Scrollbar styling for the inner content */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 20px;
 }

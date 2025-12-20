@@ -2,15 +2,15 @@ import { Link, useLocation } from 'react-router-dom';
 
 /**
  * Componente Sidebar para navegación lateral
- * Estilo moderno, oscuro y profesional
+ * Estilo moderno Dashboard (Light/Clean)
  */
 export default function Sidebar() {
   const location = useLocation();
 
   const isActive = (path: string) => {
     return location.pathname === path 
-      ? 'bg-primary text-white shadow-lg shadow-primary/30' 
-      : 'text-gray-400 hover:text-white hover:bg-white/5';
+      ? 'bg-blue-50 text-blue-600 shadow-sm' 
+      : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50';
   };
 
   const navItems = [
@@ -19,7 +19,7 @@ export default function Sidebar() {
       label: 'Generador',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11.542 6.356a6 6 0 015.743-7.743A2 2 0 0115 7zm-5 10v4a1 1 0 001 1h2a1 1 0 001-1v-4M6 20h12a1 1 0 001-1v-4a1 1 0 00-1-1H6a1 1 0 00-1 1v4a1 1 0 001 1z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
         </svg>
       )
     },
@@ -28,7 +28,7 @@ export default function Sidebar() {
       label: 'Analizador',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
       )
     },
@@ -50,59 +50,65 @@ export default function Sidebar() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       )
-    },
-    {
-      path: '/about',
-      label: 'Acerca de',
-      icon: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
     }
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-sidebar text-sidebar-foreground border-r border-white/10 hidden md:flex flex-col z-50">
+    <aside className="h-full flex flex-col py-8 px-6 border-r border-gray-100 bg-white/50">
       {/* Logo Area */}
-      <div className="p-6 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-primary rounded-lg shadow-lg shadow-primary/20">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-          </div>
-          <span className="text-xl font-bold tracking-tight text-white">SecurePass</span>
+      <div className="mb-10 px-2 flex items-center gap-3">
+        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+        <div>
+          <h1 className="text-xl font-bold text-gray-900 tracking-tight">SecurePass</h1>
+          <p className="text-xs text-gray-500 font-medium">Pro Security</p>
         </div>
       </div>
 
       {/* Navigation Links */}
-      <nav className="flex-1 p-4 space-y-2">
-        <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 px-3">
-          Menu Principal
+      <nav className="flex-1 space-y-1">
+        <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-3">
+          Menu
         </div>
         
         {navItems.map((item) => (
           <Link
             key={item.path}
             to={item.path}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 font-medium ${isActive(item.path)}`}
+            className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-200 font-semibold text-sm ${isActive(item.path)}`}
           >
             {item.icon}
             <span>{item.label}</span>
           </Link>
         ))}
+
+        <div className="mt-8 text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-3">
+          Otros
+        </div>
+        
+        <Link
+          to="/about"
+          className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-200 font-semibold text-sm ${isActive('/about')}`}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>Acerca de</span>
+        </Link>
       </nav>
 
-      {/* User / Footer Area */}
-      <div className="p-4 border-t border-white/10 bg-black/20">
-        <div className="flex items-center gap-3 px-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-purple-500 flex items-center justify-center text-xs font-bold text-white">
-            SP
+      {/* Footer / User Area */}
+      <div className="mt-auto pt-6">
+        <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 font-bold">
+            U
           </div>
-          <div className="flex-1">
-            <p className="text-sm font-medium text-white">Usuario</p>
-            <p className="text-xs text-gray-400">Versión 1.0.0</p>
+          <div className="overflow-hidden">
+            <p className="text-sm font-bold text-gray-900 truncate">Usuario Demo</p>
+            <p className="text-xs text-blue-600 truncate">Pro Plan</p>
           </div>
         </div>
       </div>

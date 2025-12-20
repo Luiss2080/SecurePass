@@ -1,27 +1,32 @@
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/layout/Sidebar';
-import Footer from '../components/layout/Footer';
+import RightSidebar from '../components/layout/RightSidebar';
+import TopBar from '../components/layout/TopBar';
 
 /**
- * Layout principal actualizado con Sidebar y estilo profesional
+ * Layout "Floating Dashboard"
+ * Estilo moderno tipo tarjeta flotante
  */
 export default function MainLayout() {
   return (
-    <div className="min-h-screen bg-background flex">
-      {/* Sidebar fijo para desktop */}
-      <Sidebar />
+    <div className="app-container">
+      <div className="dashboard-card animate-scaleIn">
+        {/* Columna Izquierda: Sidebar */}
+        <Sidebar />
 
-      {/* Contenedor principal ajustado al sidebar */}
-      <div className="flex-1 flex flex-col md:pl-64 min-h-screen transition-all duration-300">
-        
-        {/* Contenido principal scrolleable */}
-        <main className="flex-grow p-6 md:p-12 overflow-y-auto">
-          <div className="max-w-5xl mx-auto w-full animate-fadeIn">
-            <Outlet />
-          </div>
-        </main>
+        {/* Columna Central: Contenido Principal */}
+        <div className="flex flex-col min-w-0 bg-white/50 relative">
+          <TopBar />
+          
+          <main className="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8">
+            <div className="max-w-4xl mx-auto w-full">
+              <Outlet />
+            </div>
+          </main>
+        </div>
 
-        <Footer />
+        {/* Columna Derecha: Panel Lateral */}
+        <RightSidebar />
       </div>
     </div>
   );
