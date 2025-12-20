@@ -3,6 +3,12 @@
 @import "./styles/animations.css";
 @import "./styles/components.css";
 
+@theme {
+  --color-border: var(--border-color);
+  --color-background: var(--bg-page);
+  --color-foreground: var(--text-primary);
+}
+
 @layer base {
   * {
     @apply border-border;
