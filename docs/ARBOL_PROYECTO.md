@@ -154,7 +154,7 @@ SecurePass/
         │   │   └── 📄 TextoContrasena.tsx  # Display password
         │   │
         │   └── 📁 titulos/
-        │       ├── 📄 Subtitulo.tsx        # Subtítulo
+        │       ├── 📄 Subtitulo.tsx        # Subtítulo.
         │       └── 📄 TituloPrincipal.tsx  # Título.
         │
         └── 📁 pantallas/                    # Pantallas completas.
