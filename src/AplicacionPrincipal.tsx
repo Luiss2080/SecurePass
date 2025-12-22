@@ -1,10 +1,10 @@
-import PantallaPrincipal from './vistas/pantallas/PantallaPrincipal';
+import App from './App';
 
 /**
  * Componente principal de la aplicación SecurePass
  */
 function App() {
-  return <PantallaPrincipal />;
+  return <App />;
 }
 
 export default App;
