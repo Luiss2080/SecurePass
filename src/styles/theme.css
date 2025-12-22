@@ -46,6 +46,10 @@
   overflow: hidden;
 }
 
+.dashboard-card--wide {
+  grid-template-columns: 280px 1fr;
+}
+
 /* Scrollbar styling for the inner content */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
