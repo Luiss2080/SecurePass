@@ -11,13 +11,11 @@ export default function AboutPage() {
         <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-purple-500/30 rounded-full blur-2xl"></div>
         
         <div className="relative z-10 text-center max-w-2xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-            Sobre SecurePass
-          </h1>
-          <p className="text-gray-300 text-lg">
-            La seguridad y privacidad son nuestra prioridad absoluta.
-            Construido para el usuario moderno.
-          </p>
+          <div className="inline-flex items-center gap-2">
+            <span className="px-3 py-1 rounded-full bg-white/10 text-blue-200 text-xs font-bold">Privacidad</span>
+            <span className="px-3 py-1 rounded-full bg-white/10 text-purple-200 text-xs font-bold">Seguridad</span>
+            <span className="px-3 py-1 rounded-full bg-white/10 text-emerald-200 text-xs font-bold">Open Source</span>
+          </div>
         </div>
       </div>
 
