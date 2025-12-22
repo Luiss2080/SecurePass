@@ -157,7 +157,7 @@ SecurePass/
         │       ├── 📄 Subtitulo.tsx        # Subtítulo
         │       └── 📄 TituloPrincipal.tsx  # Título.
         │
-        └── 📁 pantallas/                    # Pantallas completas
+        └── 📁 pantallas/                    # Pantallas completas.
             ├── 📄 PantallaPrincipal.tsx    # Pantalla principal.
             │
             ├── 📁 configuracion/
