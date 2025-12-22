@@ -5,6 +5,9 @@ import AboutPage from './pages/AboutPage';
 import AnalyzerPage from './pages/AnalyzerPage';
 import HistoryPage from './pages/HistoryPage';
 import SettingsPage from './pages/SettingsPage';
+import DocsPage from './pages/DocsPage';
+import SupportPage from './pages/SupportPage';
+import StatusPage from './pages/StatusPage';
 
 /**
  * Componente principal que define el enrutamiento
@@ -19,6 +22,9 @@ function App() {
           <Route path="history" element={<HistoryPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="about" element={<AboutPage />} />
+          <Route path="docs" element={<DocsPage />} />
+          <Route path="support" element={<SupportPage />} />
+          <Route path="status" element={<StatusPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,6 +1,7 @@
 /**
  * Componente Footer minimalista y profesional
  */
+import { Link } from 'react-router-dom';
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -14,12 +15,12 @@ export default function Footer() {
         </div>
         
         <div className="flex items-center gap-6">
-          <a href="#" className="hover:text-primary transition-colors">Documentación</a>
-          <a href="#" className="hover:text-primary transition-colors">Soporte</a>
-          <div className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+          <Link to="/docs" className="hover:text-primary transition-colors">Documentación</Link>
+          <Link to="/support" className="hover:text-primary transition-colors">Soporte</Link>
+          <Link to="/status" className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
             Sistema Online
-          </div>
+          </Link>
         </div>
       </div>
     </footer>
