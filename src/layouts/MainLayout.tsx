@@ -1,25 +1,29 @@
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import Sidebar from '../components/layout/Sidebar';
-import RightSidebar from '../components/layout/RightSidebar';
 import TopBar from '../components/layout/TopBar';
-import Footer from '../components/layout/Footer';
+import NotificationModal from '../components/layout/NotificationModal';
+import FooterModal from '../components/layout/FooterModal';
 
 /**
  * Layout "Floating Dashboard"
  * Estilo moderno tipo tarjeta flotante
  */
 export default function MainLayout() {
-  const [showRightPanel, setShowRightPanel] = useState(true);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [showFooterModal, setShowFooterModal] = useState(false);
   return (
     <div className="app-container">
-      <div className={`dashboard-card animate-scaleIn ${showRightPanel ? '' : 'dashboard-card--wide'}`}>
+      <div className={`dashboard-card dashboard-card--wide animate-scaleIn`}>
         {/* Columna Izquierda: Sidebar */}
         <Sidebar />
 
         {/* Columna Central: Contenido Principal */}
         <div className="flex flex-col min-w-0 min-h-0 bg-white/50 relative">
-          <TopBar onToggleRightPanel={() => setShowRightPanel((p) => !p)} panelActive={showRightPanel} />
+          <TopBar 
+            onOpenNotifications={() => setShowNotifications(true)} 
+            onOpenFooter={() => setShowFooterModal(true)} 
+          />
           
           <main className="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8 min-h-0">
             <div className="w-full">
@@ -27,12 +31,12 @@ export default function MainLayout() {
             </div>
           </main>
 
-          <Footer />
         </div>
 
-        {/* Columna Derecha: Panel Lateral */}
-        {showRightPanel && <RightSidebar />}
       </div>
+      
+      <NotificationModal open={showNotifications} onClose={() => setShowNotifications(false)} />
+      <FooterModal open={showFooterModal} onClose={() => setShowFooterModal(false)} />
     </div>
   );
 }
