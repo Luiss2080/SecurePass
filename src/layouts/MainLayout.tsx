@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Sidebar from '../components/layout/Sidebar';
 import TopBar from '../components/layout/TopBar';
 import NotificationModal from '../components/layout/NotificationModal';
-import Footer from '../components/layout/Footer';
+import FooterModal from '../components/layout/FooterModal';
 
 /**
  * Layout "Floating Dashboard"
@@ -11,6 +11,7 @@ import Footer from '../components/layout/Footer';
  */
 export default function MainLayout() {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showFooter, setShowFooter] = useState(false);
   return (
     <div className="app-container">
       <div className={`dashboard-card dashboard-card--wide animate-scaleIn`}>
@@ -21,6 +22,7 @@ export default function MainLayout() {
         <div className="flex flex-col min-w-0 min-h-0 bg-white/50 relative">
           <TopBar 
             onOpenNotifications={() => setShowNotifications(true)}
+            onOpenFooter={() => setShowFooter(true)}
           />
           
           <main className="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8 min-h-0">
@@ -28,13 +30,12 @@ export default function MainLayout() {
               <Outlet />
             </div>
           </main>
-          
-          <Footer />
         </div>
 
       </div>
       
       <NotificationModal open={showNotifications} onClose={() => setShowNotifications(false)} />
+      <FooterModal open={showFooter} onClose={() => setShowFooter(false)} />
     </div>
   );
 }

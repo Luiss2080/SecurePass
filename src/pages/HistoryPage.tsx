@@ -7,6 +7,11 @@ export default function HistoryPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStrength, setFilterStrength] = useState<'all' | 'weak' | 'medium' | 'strong'>('all');
 
+  const total = history.length;
+  const strongCount = history.filter(h => h.strength === 4).length;
+  const weakCount = history.filter(h => h.strength <= 2).length;
+  const avgStrength = total ? (history.reduce((acc, h) => acc + h.strength, 0) / total).toFixed(1) : '0.0';
+
   const filteredHistory = history.filter(item => {
     const matchesSearch = item.password.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStrength = 
@@ -34,7 +39,6 @@ export default function HistoryPage() {
 
   return (
     <div className="space-y-8 animate-fadeIn">
-      {/* Header con estadísticas */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-2">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
@@ -44,7 +48,24 @@ export default function HistoryPage() {
             Gestiona tus credenciales generadas recientemente.
           </p>
         </div>
-        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+          <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
+            <div className="text-xs font-bold text-gray-500">Total</div>
+            <div className="text-2xl font-bold text-gray-900">{total}</div>
+          </div>
+          <div className="bg-green-50 rounded-2xl border border-green-100 p-4 shadow-sm">
+            <div className="text-xs font-bold text-green-600">Fuertes</div>
+            <div className="text-2xl font-bold text-gray-900">{strongCount}</div>
+          </div>
+          <div className="bg-red-50 rounded-2xl border border-red-100 p-4 shadow-sm">
+            <div className="text-xs font-bold text-red-600">Débiles</div>
+            <div className="text-2xl font-bold text-gray-900">{weakCount}</div>
+          </div>
+          <div className="bg-blue-50 rounded-2xl border border-blue-100 p-4 shadow-sm">
+            <div className="text-xs font-bold text-blue-600">Promedio</div>
+            <div className="text-2xl font-bold text-gray-900">{avgStrength}</div>
+          </div>
+        </div>
         {history.length > 0 && (
           <button
             onClick={() => {

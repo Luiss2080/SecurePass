@@ -4,6 +4,7 @@ import { useHistory } from '../hooks/useHistory';
 import PasswordOptionsPanel from '../components/password/PasswordOptionsPanel';
 import CopyButton from '../components/ui/CopyButton';
 import GenerateButton from '../components/ui/GenerateButton';
+import SecurityTips from '../components/layout/SecurityTips';
 
 /**
  * Página principal: Generador de Contraseñas
@@ -92,6 +93,9 @@ export default function GeneratorPage() {
                 options={options} 
                 onOptionsChange={updateOptions} 
              />
+             <div className="mt-6">
+               <SecurityTips />
+             </div>
            </div>
         </div>
 

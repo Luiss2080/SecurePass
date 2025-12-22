@@ -50,6 +50,12 @@ export default function AnalyzerPage() {
             Auditoría profunda de credenciales.
           </p>
         </div>
+        <div className="hidden md:flex items-center gap-3">
+          <div className="px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold">
+            Live
+          </div>
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-12 gap-8">
@@ -153,6 +159,20 @@ export default function AnalyzerPage() {
                 info="Los símbolos añaden mucha entropía."
               />
             </ul>
+          </div>
+          
+          <div className="bg-gradient-to-r from-indigo-500 to-blue-600 rounded-3xl p-6 text-white shadow-lg">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-white/20 rounded-lg">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span className="text-sm font-bold">Recomendación Inteligente</span>
+            </div>
+            <p className="text-blue-100 text-sm">
+              Usa al menos 3 tipos de caracteres y una longitud de 16 para alcanzar seguridad óptima basada en nuestros cálculos de entropía.
+            </p>
           </div>
         </div>
       </div>
