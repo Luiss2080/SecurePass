@@ -6,6 +6,20 @@ export default function HistoryPage() {
   const { history, clearHistory, deleteItem } = useHistory();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStrength, setFilterStrength] = useState<'all' | 'weak' | 'medium' | 'strong'>('all');
+  const exportCSV = () => {
+    const rows = [
+      ['password','strength','timestamp'],
+      ...filteredHistory.map(h => [h.password, String(h.strength), new Date(h.timestamp).toISOString()])
+    ];
+    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'securepass_history.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   const total = history.length;
   const strongCount = history.filter(h => h.strength === 4).length;
@@ -100,6 +114,9 @@ export default function HistoryPage() {
           <FilterButton active={filterStrength === 'strong'} onClick={() => setFilterStrength('strong')} label="Fuertes" color="green" />
           <FilterButton active={filterStrength === 'medium'} onClick={() => setFilterStrength('medium')} label="Medias" color="yellow" />
           <FilterButton active={filterStrength === 'weak'} onClick={() => setFilterStrength('weak')} label="Débiles" color="red" />
+          <button onClick={exportCSV} className="ml-2 px-4 py-2 rounded-xl bg-gray-900 text-white text-sm font-bold hover:bg-black transition-colors">
+            Exportar CSV
+          </button>
         </div>
       </div>
 
