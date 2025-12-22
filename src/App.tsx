@@ -8,6 +8,7 @@ import SettingsPage from './pages/SettingsPage';
 import DocsPage from './pages/DocsPage';
 import SupportPage from './pages/SupportPage';
 import StatusPage from './pages/StatusPage';
+import TipsPage from './pages/TipsPage';
 
 /**
  * Componente principal que define el enrutamiento
@@ -25,6 +26,7 @@ function App() {
           <Route path="docs" element={<DocsPage />} />
           <Route path="support" element={<SupportPage />} />
           <Route path="status" element={<StatusPage />} />
+          <Route path="tips" element={<TipsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -54,7 +54,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="h-full flex flex-col py-8 px-6 border-r border-slate-800 bg-slate-900 text-white">
+    <aside className="h-full flex flex-col py-8 px-6 border-r border-slate-800 bg-slate-900 text-white overflow-y-auto custom-scrollbar">
       {/* Logo Area */}
       <div className="mb-10 px-2 flex items-center gap-3">
         <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
@@ -86,9 +86,48 @@ export default function Sidebar() {
         ))}
 
         <div className="mt-8 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 px-3">
-          Otros
+          Recursos
         </div>
         
+        <Link
+          to="/docs"
+          className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-200 font-semibold text-sm ${isActive('/docs')}`}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20l9-7-9-7-9 7 9 7z" />
+          </svg>
+          <span>Documentación</span>
+        </Link>
+        <Link
+          to="/support"
+          className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-200 font-semibold text-sm ${isActive('/support')}`}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 13v6a2 2 0 01-2 2H8l-4 3V6a2 2 0 012-2h8" />
+          </svg>
+          <span>Soporte</span>
+        </Link>
+        <Link
+          to="/status"
+          className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-200 font-semibold text-sm ${isActive('/status')}`}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+          <span>Estado</span>
+        </Link>
+        <Link
+          to="/tips"
+          className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-200 font-semibold text-sm ${isActive('/tips')}`}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span>Consejos</span>
+        </Link>
+        <div className="mt-8 text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 px-3">
+          Otros
+        </div>
         <Link
           to="/about"
           className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-200 font-semibold text-sm ${isActive('/about')}`}

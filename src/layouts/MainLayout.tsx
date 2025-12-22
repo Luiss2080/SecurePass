@@ -16,10 +16,10 @@ export default function MainLayout() {
         <Sidebar />
 
         {/* Columna Central: Contenido Principal */}
-        <div className="flex flex-col min-w-0 bg-white/50 relative">
+        <div className="flex flex-col min-w-0 min-h-0 bg-white/50 relative">
           <TopBar />
           
-          <main className="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8">
+          <main className="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8 min-h-0">
             <div className="w-full">
               <Outlet />
             </div>
