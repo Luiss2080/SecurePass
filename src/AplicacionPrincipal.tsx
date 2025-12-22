@@ -3,8 +3,8 @@ import App from './App';
 /**
  * Componente principal de la aplicación SecurePass
  */
-function App() {
+function AplicacionPrincipal() {
   return <App />;
 }
 
-export default App;
+export default AplicacionPrincipal;
