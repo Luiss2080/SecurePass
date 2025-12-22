@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Sidebar from '../components/layout/Sidebar';
 import TopBar from '../components/layout/TopBar';
 import NotificationModal from '../components/layout/NotificationModal';
-import FooterModal from '../components/layout/FooterModal';
+import Footer from '../components/layout/Footer';
 
 /**
  * Layout "Floating Dashboard"
@@ -11,7 +11,6 @@ import FooterModal from '../components/layout/FooterModal';
  */
 export default function MainLayout() {
   const [showNotifications, setShowNotifications] = useState(false);
-  const [showFooterModal, setShowFooterModal] = useState(false);
   return (
     <div className="app-container">
       <div className={`dashboard-card dashboard-card--wide animate-scaleIn`}>
@@ -21,8 +20,7 @@ export default function MainLayout() {
         {/* Columna Central: Contenido Principal */}
         <div className="flex flex-col min-w-0 min-h-0 bg-white/50 relative">
           <TopBar 
-            onOpenNotifications={() => setShowNotifications(true)} 
-            onOpenFooter={() => setShowFooterModal(true)} 
+            onOpenNotifications={() => setShowNotifications(true)}
           />
           
           <main className="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8 min-h-0">
@@ -30,13 +28,13 @@ export default function MainLayout() {
               <Outlet />
             </div>
           </main>
-
+          
+          <Footer />
         </div>
 
       </div>
       
       <NotificationModal open={showNotifications} onClose={() => setShowNotifications(false)} />
-      <FooterModal open={showFooterModal} onClose={() => setShowFooterModal(false)} />
     </div>
   );
 }

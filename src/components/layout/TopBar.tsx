@@ -1,6 +1,6 @@
 import { useLocation, Link } from 'react-router-dom';
 
-export default function TopBar({ onOpenNotifications, onOpenFooter }: { onOpenNotifications?: () => void, onOpenFooter?: () => void }) {
+export default function TopBar({ onOpenNotifications }: { onOpenNotifications?: () => void }) {
   const location = useLocation();
 
   const getBreadcrumb = () => {
@@ -60,17 +60,7 @@ export default function TopBar({ onOpenNotifications, onOpenFooter }: { onOpenNo
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 20l9-7-9-7-9 7 9 7z" />
           </svg>
         </Link>
-        {onOpenFooter && (
-          <button
-            onClick={onOpenFooter}
-            className="p-2 rounded-xl bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
-            title="Información"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </button>
-        )}
+        
         <div className="p-2 rounded-xl bg-white border border-gray-200 text-gray-700" title="Usuario">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
