@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePasswordGenerator } from '../hooks/usePasswordGenerator';
 import { useHistory } from '../hooks/useHistory';
 import PasswordOptionsPanel from '../components/password/PasswordOptionsPanel';
@@ -22,6 +22,7 @@ export default function GeneratorPage() {
 
   const { addToHistory } = useHistory();
   const lastSavedPassword = useRef('');
+  const [autoGenerate, setAutoGenerate] = useState(false);
 
   // Generar contraseña inicial al montar el componente
   useEffect(() => {
@@ -35,6 +36,15 @@ export default function GeneratorPage() {
       lastSavedPassword.current = password;
     }
   }, [password, passwordStrength, addToHistory]);
+
+  // Auto-generación cada 3s si está activado
+  useEffect(() => {
+    if (!autoGenerate) return;
+    const id = setInterval(() => {
+      generateNewPassword();
+    }, 3000);
+    return () => clearInterval(id);
+  }, [autoGenerate, generateNewPassword]);
 
   return (
     <div className="space-y-8 animate-fadeIn">
@@ -63,6 +73,10 @@ export default function GeneratorPage() {
                 isGenerating={isGenerating}
                 variant="white" // Need to ensure this variant exists or style manually
               />
+              <label className="inline-flex items-center gap-2 ml-4 align-middle">
+                <input type="checkbox" checked={autoGenerate} onChange={(e) => setAutoGenerate(e.target.checked)} />
+                <span className="text-xs text-blue-100">Auto (3s)</span>
+              </label>
             </div>
           </div>
 
