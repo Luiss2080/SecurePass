@@ -19,8 +19,8 @@ export default function MainLayout() {
         <div className="flex flex-col min-w-0 bg-white/50 relative">
           <TopBar />
           
-          <main className="flex-1 overflow-y-auto custom-scrollbar px-6 pb-6">
-            <div className="w-full max-w-[98%] mx-auto">
+          <main className="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8">
+            <div className="w-full">
               <Outlet />
             </div>
           </main>
