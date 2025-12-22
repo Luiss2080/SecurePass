@@ -1,9 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { usePasswordGenerator } from '../hooks/usePasswordGenerator';
 import { useHistory } from '../hooks/useHistory';
-import PasswordDisplay from '../components/password/PasswordDisplay';
 import PasswordOptionsPanel from '../components/password/PasswordOptionsPanel';
-import StrengthMeter from '../components/password/StrengthMeter';
 import CopyButton from '../components/ui/CopyButton';
 import GenerateButton from '../components/ui/GenerateButton';
 
