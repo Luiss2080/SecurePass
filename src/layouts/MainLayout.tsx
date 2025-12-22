@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { useState } from 'react';
 import Sidebar from '../components/layout/Sidebar';
 import RightSidebar from '../components/layout/RightSidebar';
 import TopBar from '../components/layout/TopBar';
@@ -9,15 +10,16 @@ import Footer from '../components/layout/Footer';
  * Estilo moderno tipo tarjeta flotante
  */
 export default function MainLayout() {
+  const [showRightPanel, setShowRightPanel] = useState(true);
   return (
     <div className="app-container">
-      <div className="dashboard-card animate-scaleIn">
+      <div className={`dashboard-card animate-scaleIn ${showRightPanel ? '' : 'dashboard-card--wide'}`}>
         {/* Columna Izquierda: Sidebar */}
         <Sidebar />
 
         {/* Columna Central: Contenido Principal */}
         <div className="flex flex-col min-w-0 min-h-0 bg-white/50 relative">
-          <TopBar />
+          <TopBar onToggleRightPanel={() => setShowRightPanel((p) => !p)} panelActive={showRightPanel} />
           
           <main className="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8 min-h-0">
             <div className="w-full">
@@ -29,7 +31,7 @@ export default function MainLayout() {
         </div>
 
         {/* Columna Derecha: Panel Lateral */}
-        <RightSidebar />
+        {showRightPanel && <RightSidebar />}
       </div>
     </div>
   );

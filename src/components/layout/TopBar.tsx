@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-export default function TopBar() {
+export default function TopBar({ onToggleRightPanel, panelActive }: { onToggleRightPanel?: () => void, panelActive?: boolean }) {
   const location = useLocation();
 
   const getBreadcrumb = () => {
@@ -38,6 +38,17 @@ export default function TopBar() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </div>
+        {onToggleRightPanel && (
+          <button
+            onClick={onToggleRightPanel}
+            className={`px-3 py-2 rounded-xl text-sm font-bold transition-all border ${
+              panelActive ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+            }`}
+            title="Panel de Notificaciones"
+          >
+            {panelActive ? 'Ocultar Panel' : 'Mostrar Panel'}
+          </button>
+        )}
       </div>
     </header>
   );
