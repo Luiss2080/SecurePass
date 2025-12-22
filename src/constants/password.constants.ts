@@ -17,6 +17,9 @@ export const DEFAULT_PASSWORD_OPTIONS = {
   includeLowercase: true,
   includeNumbers: true,
   includeSymbols: true,
+  excludeSimilar: false,
+  noSequential: true,
+  allowSpaces: false,
 } as const;
 
 /**

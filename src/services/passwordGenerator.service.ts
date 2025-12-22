@@ -14,6 +14,13 @@ export function generatePassword(options: PasswordOptions): string {
   if (options.includeUppercase) charset += CHARSET.UPPERCASE;
   if (options.includeNumbers) charset += CHARSET.NUMBERS;
   if (options.includeSymbols) charset += CHARSET.SYMBOLS;
+  if (options.allowSpaces) charset += ' ';
+
+  // Excluir caracteres visualmente similares si se solicita
+  if (options.excludeSimilar) {
+    const similar = /[Il1O0]/g;
+    charset = charset.replace(similar, '');
+  }
 
   // Si no hay caracteres seleccionados, usar minúsculas por defecto
   if (charset === '') charset = CHARSET.LOWERCASE;
@@ -28,6 +35,22 @@ export function generatePassword(options: PasswordOptions): string {
 
   // Asegurar que al menos un carácter de cada tipo seleccionado esté incluido
   password = ensureCharacterTypes(password, options);
+
+  // Evitar patrones secuenciales obvios si se solicita
+  if (options.noSequential) {
+    const sequential = /(012|123|234|345|456|567|678|789|890|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz)/i;
+    let attempts = 0;
+    while (sequential.test(password) && attempts < 5) {
+      // re-generar rápidamente
+      password = '';
+      crypto.getRandomValues(array);
+      for (let i = 0; i < options.length; i++) {
+        password += charset[array[i] % charset.length];
+      }
+      password = ensureCharacterTypes(password, options);
+      attempts++;
+    }
+  }
 
   return password;
 }

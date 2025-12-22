@@ -4,6 +4,9 @@ export interface PasswordOptions {
   includeLowercase: boolean;
   includeNumbers: boolean;
   includeSymbols: boolean;
+  excludeSimilar?: boolean;
+  noSequential?: boolean;
+  allowSpaces?: boolean;
 }
 
 export interface PasswordStrength {

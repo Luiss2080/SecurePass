@@ -87,6 +87,30 @@ export default function PasswordOptionsPanel({ options, onOptionsChange }: Passw
           onChange={() => toggleOption('includeSymbols')}
           example="!@#"
         />
+
+        <div className="pt-4 border-t border-gray-100 grid sm:grid-cols-2 gap-3">
+          <CheckboxOption
+            id="excludeSimilar"
+            label="Excluir similares (Il1 O0)"
+            checked={!!options.excludeSimilar}
+            onChange={() => toggleOption('excludeSimilar')}
+            example="Il1O0"
+          />
+          <CheckboxOption
+            id="noSequential"
+            label="Evitar secuencias (abc, 123)"
+            checked={!!options.noSequential}
+            onChange={() => toggleOption('noSequential')}
+            example="abc123"
+          />
+          <CheckboxOption
+            id="allowSpaces"
+            label="Permitir espacios (passphrase)"
+            checked={!!options.allowSpaces}
+            onChange={() => toggleOption('allowSpaces')}
+            example="con junto"
+          />
+        </div>
       </div>
     </div>
   );
