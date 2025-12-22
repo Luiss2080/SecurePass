@@ -41,14 +41,11 @@ export default function AnalyzerPage() {
 
   return (
     <div className="space-y-8 animate-fadeIn">
-      <div className="flex items-end justify-between mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-            Analizador de Seguridad
-          </h1>
-          <p className="text-gray-500 mt-2 text-lg">
-            Auditoría profunda de credenciales.
-          </p>
+      <div className="flex items-end justify-between mb-4">
+        <div className="hidden md:flex items-center gap-2 text-xs text-gray-500">
+          <span className="px-2 py-1 rounded-full bg-gray-100">Auditoría</span>
+          <span className="px-2 py-1 rounded-full bg-gray-100">Entropía</span>
+          <span className="px-2 py-1 rounded-full bg-gray-100">Pool</span>
         </div>
         <div className="hidden md:flex items-center gap-3">
           <div className="px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold">
