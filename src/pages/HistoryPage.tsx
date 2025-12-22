@@ -40,13 +40,10 @@ export default function HistoryPage() {
   return (
     <div className="space-y-8 animate-fadeIn">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-2">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-            Historial de Generación
-          </h1>
-          <p className="text-gray-500 mt-2 text-lg">
-            Gestiona tus credenciales generadas recientemente.
-          </p>
+        <div className="hidden md:flex items-center gap-2 text-xs text-gray-500">
+          <span className="px-2 py-1 rounded-full bg-gray-100">Historial</span>
+          <span className="px-2 py-1 rounded-full bg-gray-100">Filtros</span>
+          <span className="px-2 py-1 rounded-full bg-gray-100">Exportar</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
           <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
