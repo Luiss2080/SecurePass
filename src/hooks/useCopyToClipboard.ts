@@ -20,6 +20,21 @@ export function useCopyToClipboard() {
         setCopied(false);
       }, ANIMATION_DURATION.COPY_FEEDBACK);
 
+      // Limpiar portapapeles si la opción está habilitada en configuración
+      try {
+        const settingsRaw = localStorage.getItem('securepass_settings');
+        if (settingsRaw) {
+          const settings = JSON.parse(settingsRaw);
+          if (settings.clipboardAutoClear === true) {
+            setTimeout(async () => {
+              try {
+                await navigator.clipboard.writeText('');
+              } catch {}
+            }, 30000);
+          }
+        }
+      } catch {}
+
       return true;
     } catch (err) {
       console.error('Error al copiar al portapapeles:', err);

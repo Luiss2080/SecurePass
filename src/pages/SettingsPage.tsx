@@ -4,6 +4,7 @@ export default function SettingsPage() {
   const [autoCopy, setAutoCopy] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
+  const [clipboardAutoClear, setClipboardAutoClear] = useState(false);
 
   // Simulación de persistencia
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function SettingsPage() {
       setAutoCopy(parsed.autoCopy);
       setDarkMode(parsed.darkMode);
       setNotifications(parsed.notifications);
+      setClipboardAutoClear(parsed.clipboardAutoClear ?? false);
     }
   }, []);
 
@@ -21,24 +23,19 @@ export default function SettingsPage() {
       autoCopy: key === 'autoCopy' ? value : autoCopy,
       darkMode: key === 'darkMode' ? value : darkMode,
       notifications: key === 'notifications' ? value : notifications,
+      clipboardAutoClear: key === 'clipboardAutoClear' ? value : clipboardAutoClear,
     };
     localStorage.setItem('securepass_settings', JSON.stringify(newSettings));
     
     if (key === 'autoCopy') setAutoCopy(value);
     if (key === 'darkMode') setDarkMode(value);
     if (key === 'notifications') setNotifications(value);
+     if (key === 'clipboardAutoClear') setClipboardAutoClear(value);
   };
 
   return (
     <div className="space-y-8 animate-fadeIn">
-      <div className="mb-4">
-        <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-          Configuración
-        </h1>
-        <p className="text-gray-500 mt-2 text-lg">
-          Personaliza tu experiencia en SecurePass.
-        </p>
-      </div>
+      <div className="mb-2"></div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Tarjeta General */}
@@ -62,6 +59,12 @@ export default function SettingsPage() {
             description="Alertas visuales de acciones."
             checked={notifications}
             onChange={(checked) => saveSettings('notifications', checked)}
+          />
+          <ToggleItem 
+            label="Limpiar portapapeles (30s)" 
+            description="Vacía el portapapeles automáticamente."
+            checked={clipboardAutoClear}
+            onChange={(checked) => saveSettings('clipboardAutoClear', checked)}
           />
         </SettingsCard>
 
