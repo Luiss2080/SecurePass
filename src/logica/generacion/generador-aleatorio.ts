@@ -12,6 +12,9 @@ export function obtenerCaracterAleatorio(conjuntoCaracteres: string): string {
  * Obtiene una posición aleatoria no repetida
  */
 export function obtenerPosicionAleatoria(longitud: number, excluir: Set<number>): number {
+  if (excluir.size >= longitud) {
+    throw new Error('No hay posiciones disponibles: todas las posiciones ya están excluidas');
+  }
   let posicion: number;
   do {
     const array = new Uint32Array(1);
