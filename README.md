@@ -1,432 +1,127 @@
-# 🔐 SecurePass
-
 <div align="center">
-
-![SecurePass Banner](https://img.shields.io/badge/SecurePass-Generador_de_Contraseñas-blueviolet?style=for-the-badge)
-![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-
-### 🎯 Generador de Contraseñas Seguras y Aleatorias
-
-**Crea contraseñas ultra-seguras en segundos | 100% privado | Sin servidor**
-
-[🚀 Demo en Vivo](#) · [📖 Documentación](DOCUMENTACION_INDEX.md) · [🐛 Reportar Bug](#)
-
+  <img src="docs/assets/logo.svg" width="96" alt="Logo de SecurePass" />
+  <h1>SecurePass</h1>
+  <p><b>Generador y analizador de contraseñas que corre 100 % en el navegador, sin servidor ni base de datos.</b></p>
+  <img src="https://img.shields.io/badge/estado-funcional-16a34a?style=for-the-badge" alt="Estado: funcional" />
+  <img src="https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19.2" />
+  <img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript 5.9" />
+  <img src="https://img.shields.io/badge/Tailwind-4.1-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4.1" />
+  <img src="https://img.shields.io/badge/Vite-SPA-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/tests-ninguno-lightgrey?style=for-the-badge" alt="Sin tests" />
+  <p>
+    <a href="#-inicio-rápido">Inicio rápido</a> ·
+    <a href="#-características">Características</a> ·
+    <a href="#-arquitectura">Arquitectura</a> ·
+    <a href="#-pruebas">Pruebas</a> ·
+    <a href="#-lo-que-todavía-no-existe">Limitaciones</a>
+  </p>
 </div>
 
----
+**SecurePass** es una aplicación de una sola página (React + Vite) que genera contraseñas aleatorias con la API criptográfica del navegador (`crypto.getRandomValues`), mide su fortaleza y guarda un historial local. Todo ocurre en el cliente: no hay backend ni cuentas. **No es** un gestor de contraseñas: no cifra ni protege lo que guarda y su historial es solo una comodidad de desarrollo (ver [Seguridad](#-seguridad)).
 
-## ✨ ¿Qué es SecurePass?
+## 🎬 Vista rápida
 
-**SecurePass** es un generador de contraseñas **moderno, seguro y completamente privado** que funciona directamente en tu navegador. Sin servidores, sin bases de datos, sin riesgos. Tus contraseñas nunca salen de tu dispositivo.
+Capturas reales de la aplicación local (la contraseña generada se desenfocó a propósito):
 
-### 🎯 Características Principales
+| Generador | Analizador |
+| :---: | :---: |
+| <img src="docs/screenshots/generador.png" alt="Pantalla del generador con la contraseña desenfocada, medidor de fortaleza y panel de personalización" /> | <img src="docs/screenshots/analizador.png" alt="Analizador con una cadena de ejemplo: fortaleza 96/100, 118 bits de entropía y checklist de seguridad" /> |
 
-<table>
-<tr>
-<td width="50%">
+## ✨ Características
 
-#### 🔒 **Seguridad Total**
-- ✅ Generación con **Crypto API**
-- ✅ Totalmente **offline**
-- ✅ Sin almacenamiento externo
-- ✅ Código **open source**
+| Característica | Detalle |
+| :--- | :--- |
+| 🎲 Generador | Longitud de 8 a 32 caracteres (16 por defecto); mayúsculas, minúsculas, números, símbolos y espacios opcionales. |
+| 🔤 Opciones extra | Excluir caracteres parecidos (`I l 1 O 0`), evitar secuencias obvias (`123`, `abc`…) y garantizar al menos un carácter de cada tipo elegido. |
+| ⏱️ Auto-generación | Casilla "Auto (3s)" que regenera la contraseña cada 3 segundos. |
+| 📏 Medidor de fortaleza | Puntuación heurística 0-100 (longitud, variedad y penalizaciones por repeticiones y patrones) con cuatro niveles. |
+| 🔍 Analizador | Escribe una cadena y obtiene fortaleza, entropía estimada en bits, tamaño del alfabeto usado, checklist y un tiempo estimado de fuerza bruta (a 10 000 millones de intentos/s). |
+| 🕘 Historial | Guarda hasta 50 contraseñas generadas en `localStorage`, con búsqueda, filtro por fortaleza, borrado y exportación a CSV. |
+| 📋 Copiar | Copia con un clic; opcionalmente vacía el portapapeles a los 30 s (ajuste "clipboardAutoClear"). |
+| 🧭 Páginas | Generador, Analizador, Historial, Configuración, Documentación, Soporte, Estado, Consejos y Acerca de, con enrutado por `react-router-dom`. |
 
-</td>
-<td width="50%">
+## 🏗️ Arquitectura
 
-#### ⚡ **Súper Rápido**
-- ✅ Generación **instantánea**
-- ✅ Interfaz **reactiva**
-- ✅ Copia con **un click**
-- ✅ **0 dependencias** externas
+SPA sin backend. El generador es una función pura que usa `crypto.getRandomValues`; las páginas la consumen a través de un hook, y el historial y los ajustes viven en `localStorage`.
 
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-#### 🎨 **Diseño Moderno**
-- ✅ Interfaz **intuitiva**
-- ✅ Animaciones **suaves**
-- ✅ Responsive **móvil/desktop**
-- ✅ **Dark mode** ready
-
-</td>
-<td width="50%">
-
-#### 🛠️ **Personalizable**
-- ✅ Longitud **8-32 caracteres**
-- ✅ Mayúsculas/minúsculas
-- ✅ Números y símbolos
-- ✅ Medidor de **fortaleza**
-
-</td>
-</tr>
-</table>
-
----
-
-## 🚀 Demo Interactiva
-
-```
-┌──────────────────────────────────────────────────┐
-│  🔐 SecurePass                                   │
-│  Generador de Contraseñas Seguras y Aleatorias  │
-├──────────────────────────────────────────────────┤
-│                                                  │
-│  📋  Xk9#mP2@vL5$wN8qR                         │
-│                                                  │
-│  ████████████████████░░  85% - Fuerte           │
-│                                                  │
-│  [ 🔄 Generar Nueva ]  [ 📋 Copiar ]            │
-│                                                  │
-│  ⚙️ Configuración                               │
-│  ├─ Longitud: ████████░░░░ 16                  │
-│  ├─ ☑ Mayúsculas (A-Z)                         │
-│  ├─ ☑ Minúsculas (a-z)                         │
-│  ├─ ☑ Números (0-9)                            │
-│  └─ ☑ Símbolos (!@#$%)                         │
-│                                                  │
-│  💡 Consejos de seguridad                       │
-│  • Usa contraseñas de al menos 12 caracteres    │
-│  • Combina diferentes tipos de caracteres       │
-│  • No reutilices contraseñas                    │
-└──────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+  Main["main.tsx / App.tsx (BrowserRouter)"] --> Layout["layouts/MainLayout"]
+  Layout --> Pages["pages/: Generator, Analyzer, History, Settings, Docs, Support, Status, Tips, About"]
+  Pages --> Hook["hooks/usePasswordGenerator"]
+  Hook --> Service["services/passwordGenerator.service"]
+  Service --> Crypto[("crypto.getRandomValues")]
+  Service --> Consts["constants/password.constants"]
+  Pages --> Hist["hooks/useHistory"]
+  Hist --> LS[("localStorage")]
+  Pages --> Copy["hooks/useCopyToClipboard"]
 ```
 
----
+<details>
+<summary>Estructura de carpetas</summary>
 
-## 📦 Instalación Rápida
+```text
+src/
+  pages/        una página por ruta
+  components/   layout/, password/ (opciones, medidor, historial reciente), ui/
+  hooks/        usePasswordGenerator, useHistory, useCopyToClipboard
+  services/     passwordGenerator.service.ts (generación y fortaleza)
+  constants/    límites, alfabetos, umbrales
+  types/        tipos de contraseña y opciones
+  styles/       tema, animaciones y componentes en CSS
+  configuracion/, logica/, tipos/, utilidades/   capa alternativa en español (ver Limitaciones)
+docs/           notas de reorganización y de arranque
+```
 
-### Prerrequisitos
-- Node.js 18+ 
-- npm o yarn
+</details>
 
-### Pasos
+## 🚀 Inicio rápido
+
+| Requisito | Detalle |
+| :--- | :--- |
+| Node.js y npm | Versión reciente; se verificó con Node 24 y `npm ci` |
 
 ```bash
-# 1. Clonar el repositorio
-git clone https://github.com/tu-usuario/securepass.git
----
-
-## 📂 Estructura del Proyecto
-
-```
-SecurePass/
-├── 📁 configuracion/    (15 archivos) - Valores, estilos, mensajes
-├── 📁 logica/           (10 archivos) - Lógica de negocio
-├── 📁 servicios/        (3 archivos)  - Orquestadores
-├── 📁 vistas/           (31 archivos) - Componentes React
-├── 📁 ganchos/          (3 archivos)  - React Hooks
-├── 📁 utilidades/       (9 archivos)  - Funciones helper
-├── 📁 estilos/          (7 archivos)  - Clases CSS
-└── 📁 tipos/            (2 archivos)  - Interface
-### Personalización Avanzada
-```typescript
-// Ajusta la configuración en:
-src/configuracion/inicial/opciones-defecto.ts
-
-export const OPCIONES_CONTRASENA_DEFECTO = {
-  longitud: 16,           // 8-32
-  incluirMayusculas: true,
-  incluirMinusculas: true,
-  incluirNumeros: true,
-  incluirSimbolos: true,
-};
+git clone https://github.com/Luiss2080/SecurePass.git
+cd SecurePass
+npm ci
+npm run dev        # servidor de desarrollo de Vite (por defecto http://localhost:5173)
+npm run build      # tsc + vite build, genera dist/
+npm run preview    # sirve el build
 ```
 
----
+`npm run build` compila sin errores (verificado al reescribir este README). No hay variables de entorno.
 
-## 🏗️ Tecnologías
+## 🧪 Pruebas
 
-<div align="center">
+**No hay pruebas automatizadas ni CI.** La única verificación disponible es `npm run build`, que ejecuta `tsc` y `vite build`. La lógica de generación y de fortaleza (`services/passwordGenerator.service.ts`) sería el primer candidato a tener tests.
 
-| Frontend | Estilos | Build | Lenguaje |
-|----------|---------|-------|----------|
-| ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat) | ![Tailwind](https://img.shields.io/badge/-Tailwind-38B2AC?logo=tailwind-css&logoColor=white&style=flat) | ![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white&style=flat) | ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white&style=flat) |
+## 🔒 Seguridad
 
-</div>
+Lo que sí hace el código:
 
-### Stack Técnico Completo
+- Genera con `crypto.getRandomValues`, no con `Math.random`.
+- No envía nada por red: no hay llamadas a APIs propias ni de terceros para las contraseñas.
 
-- **React 18.3** - Librería UI moderna
-- **TypeScript 5.5** - Tipado estático
-- **Tailwind CSS 3.4** - Estilos utility-first
-- **Vite 5.4** - Build tool ultrarrápido
-- **Crypto API** - Generación aleatoria segura
+Lo que debes saber:
 
+- **El historial guarda las contraseñas en texto plano** en `localStorage` (clave `securepass_history`) y el botón "Exportar CSV" las escribe sin cifrar. Cualquiera con acceso al navegador o a un script en ese origen puede leerlas. Bórralo desde la página Historial si generas contraseñas reales.
+- La página de Generador guarda **cada** contraseña generada en ese historial automáticamente.
+- Cada carácter se elige con `valor % longitud_del_alfabeto`, lo que introduce un sesgo de módulo muy pequeño (no es una selección perfectamente uniforme).
+- La "entropía" y el "tiempo para hackear" son estimaciones que asumen una cadena totalmente aleatoria: sobrevaloran frases o palabras predecibles.
 
+## 🚧 Lo que todavía no existe
 
-**📊 +60 archivos modulares** organizados en **español**
-
-👉 [Ver estructura completa](ARBOL_PROYECTO.md) | [Guía de organización](GUIA_ESTRUCTURA.md)
-
----
-
-## 🌟 Características Técnicas
-
-### 🔐 Seguridad
-- **Crypto API nativa** para máxima aleatoriedad
-- **Sin dependencias** de librerías externas
-- **Sin tracking** ni analytics
-- **100% client-side** - tus datos nunca se envían
-
-### ⚡ Performance
-- **Generación instantánea** (<10ms)
-- **Tree-shaking** automático
-- **Lazy loading** de componentes
-- **Bundle optimizado** (<100kb)
-
-### 🎨 UX/UI
-- **Animaciones fluidas** con Tailwind
-- **Responsive design** mobile-first
-- **Feedback visual** instantáneo
-- **Accesibilidad** WCAG 2.1
-
-### 🧩 Arquitectura
-- **Modular** - 60+ archivos pequeños
-- **Tipado fuerte** - 100% TypeScript
-- **Separación de responsabilidades**
-- **Fácil de mantener** y escalar
-
----
-
-## 📖 Documentación
-
-| Documento | Descripción |
-|-----------|-------------|
-| [📚 Índice de Documentación](DOCUMENTACION_INDEX.md) | Punto de entrada a toda la documentación |
-| [📊 Resumen de Reorganización](RESUMEN_REORGANIZACION.md) | Cambios y estadísticas del proyecto |
-| [🌳 Árbol del Proyecto](ARBOL_PROYECTO.md) | Estructura visual completa |
-| [🗂️ Guía de Estructura](GUIA_ESTRUCTURA.md) | Cómo está organizado el código |
-| [🚀 Guía de Migración](GUIA_MIGRACION.md) | Cómo usar la nueva estructura |
-
----
-
-## 🛠️ Scripts Disponibles
-
-```bash
-# Desarrollo
-npm run dev          # Servidor de desarrollo
-
-# Producción
-npm run build        # Build para producción
-npm run preview      # Preview del build
-
-# Linting
-npm run lint         # Ejecutar ESLint
-```
-
----
-
-## 🤝 Contribuir
-
-¡Las contribuciones son bienvenidas! 
-
-1. **Fork** el proyecto
-2. Crea una **rama** (`git checkout -b feature/AmazingFeature`)
-3. **Commit** tus cambios (`git commit -m 'Add: nueva característica'`)
-4. **Push** a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un **Pull Request**
-
-### Guías de Contribución
-- Sigue la [estructura modular](GUIA_ESTRUCTURA.md)
-- Usa **nombres en español**
-- Mantén archivos **<100 líneas**
-- Agrega **documentación**
-
----
-
-## 🔒 Seguridad y Privacidad
-
-### ✅ Qué HACE SecurePass
-- Genera contraseñas en **tu navegador**
-- Usa **Crypto API** del navegador
-- Funciona **offline**
-
-### ❌ Qué NO hace SecurePass
-- ❌ NO envía datos a servidores
-- ❌ NO almacena contraseñas
-- ❌ NO usa analytics o tracking
-- ❌ NO requiere registro
-
-**Tu privacidad es 100% respetada.**
-
----
-
-## 📊 Estadísticas del Proyecto
-
-<div align="center">
-
-![Files](https://img.shields.io/badge/Archivos-60+-blue?style=flat-square)
-![Lines](https://img.shields.io/badge/Líneas-~2500-green?style=flat-square)
-![Components](https://img.shields.io/badge/Componentes-25+-purple?style=flat-square)
-![Language](https://img.shields.io/badge/Español-100%25-red?style=flat-square)
-
-</div>
-
----
-
-## 🗺️ Roadmap
-
-- [x] Generador básico de contraseñas
-- [x] Medidor de fortaleza
-- [x] Interfaz responsive
-- [x] Documentación completa
-- [ ] Historial de contraseñas (opcional)
-- [ ] Exportar/importar configuración
-- [ ] PWA (Progressive Web App)
-- [ ] Modo oscuro
-- [ ] Múltiples idiomas
-
----
+- Sin pruebas automatizadas ni CI.
+- En **Configuración**, solo "vaciar portapapeles" tiene efecto. Los ajustes de *modo oscuro*, *copia automática* y *notificaciones* se guardan en `localStorage` pero ningún otro código los lee: hoy no cambian nada.
+- Las carpetas `src/configuracion`, `src/logica`, `src/tipos` y `src/utilidades` (una reorganización en español) **no se importan desde la aplicación**; la app usa `constants/`, `services/` y `types/`. Están duplicadas y sin usar.
+- No hay cifrado del historial, sincronización ni exportación segura; no es un gestor de contraseñas.
+- No hay despliegue publicado; `docs/` contiene notas internas de reorganización, no una guía de despliegue.
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-## 👨‍💻 Autor
-
-Creado con 💜 y mucho ☕
-
----
-
-## 🙏 Agradecimientos
-
-- **React Team** - Por la increíble librería
-- **Tailwind CSS** - Por los estilos utility-first
-- **Vite** - Por el build tool ultrarrápido
-- **MDN Web Docs** - Por la documentación de Crypto API
-
----
+Sin licencia definida: todos los derechos reservados por defecto.
 
 <div align="center">
-
-### ⭐ Si te gustó el proyecto, dale una estrella!
-
-**[⬆ Volver arriba](#-securepass)**
-
----
-
-**SecurePass** © 2025 | Hecho con ❤️ en español
-
+  <sub>Hecho por Luiss2080 · Generador de contraseñas del lado del cliente</sub>
 </div>
-
-#### 3. **Services** (`services/`)
-Lógica de negocio pura, funciones sin estado.
-
-```typescript
-// passwordGenerator.service.ts
-export function generatePassword(options: PasswordOptions): string
-export function calculatePasswordStrength(password: string): PasswordStrength
-```
-
-#### 4. **Hooks** (`hooks/`)
-Custom hooks de React para lógica reutilizable con estado.
-
-```typescript
-// usePasswordGenerator.ts
-export function usePasswordGenerator() {
-  // Lógica con useState, useMemo, useCallback
-}
-```
-
-#### 5. **Components** (`components/`)
-Componentes React organizados por funcionalidad:
-
-- **layout/**: Componentes de estructura (Header, Footer)
-- **password/**: Componentes específicos de contraseñas
-- **ui/**: Componentes UI reutilizables
-
-## 🎨 Optimizaciones de React
-
-### Hooks Utilizados
-
-- **useState**: Manejo de estado local
-- **useEffect**: Efectos secundarios (generación inicial)
-- **useMemo**: Memoización de cálculos costosos (fuerza de contraseña)
-- **useCallback**: Memoización de funciones para evitar re-renders
-
-### Ejemplo de Optimización
-
-```typescript
-// Cálculo memoizado - solo se recalcula cuando cambia la contraseña
-const passwordStrength = useMemo(() => {
-  return calculatePasswordStrength(password);
-}, [password]);
-
-// Función memoizada - mantiene la misma referencia
-const generateNewPassword = useCallback(() => {
-  const newPassword = generatePassword(options);
-  setPassword(newPassword);
-}, [options]);
-```
-
-## 🔒 Algoritmo de Generación
-
-1. **Crypto API**: Usa `crypto.getRandomValues()` para verdadera aleatoriedad
-2. **Validación**: Asegura al menos un carácter de cada tipo seleccionado
-3. **Sin patrones**: Detecta y penaliza patrones comunes (123, abc, etc.)
-
-### Cálculo de Fuerza
-
-```
-Puntuación = Longitud (40pts) + Variedad (60pts) - Penalizaciones
-```
-
-- **0-39**: Débil (rojo)
-- **40-59**: Media (amarillo)
-- **60-79**: Fuerte (verde)
-- **80-100**: Muy Fuerte (esmeralda)
-
-## 🎭 Animaciones
-
-Animaciones CSS personalizadas en `index.css`:
-
-- `fadeIn`: Aparición suave
-- `slideIn`: Deslizamiento vertical
-- `slideUp`: Entrada desde abajo
-- `shimmer`: Efecto de brillo
-- `float`: Flotación continua
-- `wiggle`: Movimiento de balanceo
-
-## 🛠️ Tecnologías
-
-- **React 19**: Framework UI
-- **TypeScript**: Type safety
-- **Vite**: Build tool ultra-rápido
-- **TailwindCSS 4**: Utilidades CSS
-- **Crypto API**: Generación aleatoria segura
-
-## 📱 Responsive Design
-
-- Mobile-first approach
-- Breakpoints: `sm`, `md`, `lg`
-- Grid y Flexbox para layouts adaptativos
-
-## 🔐 Seguridad
-
-- ✅ Generación 100% local (sin backend)
-- ✅ Uso de Crypto API (no Math.random())
-- ✅ Sin almacenamiento de contraseñas
-- ✅ Sin envío de datos a servidores externos
-
-## 📝 Licencia
-
-MIT
-
-## 👨‍💻 Autor
-
-Desarrollado como proyecto de portafolio demostrando:
-- Arquitectura limpia y escalable
-- Buenas prácticas de React
-- TypeScript avanzado
-- UI/UX moderno
-
----
-
-**Hecho con ❤️ y React**
