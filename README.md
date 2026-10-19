@@ -8,6 +8,9 @@
   <img src="https://img.shields.io/badge/Tailwind-4.1-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4.1" />
   <img src="https://img.shields.io/badge/Vite-SPA-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
   <img src="https://img.shields.io/badge/tests-ninguno-lightgrey?style=for-the-badge" alt="Sin tests" />
+  <img src="https://img.shields.io/github/license/Luiss2080/SecurePass?color=blue" alt="Licencia MIT" />
+  <img src="https://img.shields.io/github/last-commit/Luiss2080/SecurePass" alt="Último commit" />
+  <img src="https://img.shields.io/badge/PRs-bienvenidos-brightgreen.svg" alt="PRs bienvenidos" />
   <p>
     <a href="#-inicio-rápido">Inicio rápido</a> ·
     <a href="#-características">Características</a> ·
@@ -94,7 +97,7 @@ npm run preview    # sirve el build
 
 ## 🧪 Pruebas
 
-**No hay pruebas automatizadas ni CI.** La única verificación disponible es `npm run build`, que ejecuta `tsc` y `vite build`. La lógica de generación y de fortaleza (`services/passwordGenerator.service.ts`) sería el primer candidato a tener tests.
+**No hay pruebas automatizadas.** La verificación disponible es `npm run build` (ejecuta `tsc` y `vite build`), que también corre en GitHub Actions en cada push y PR a `main`. La lógica de generación y de fortaleza (`services/passwordGenerator.service.ts`) sería el primer candidato a tener tests.
 
 ## 🔒 Seguridad
 
@@ -112,15 +115,19 @@ Lo que debes saber:
 
 ## 🚧 Lo que todavía no existe
 
-- Sin pruebas automatizadas ni CI.
+- Sin pruebas automatizadas (el CI solo compila).
 - En **Configuración**, solo "vaciar portapapeles" tiene efecto. Los ajustes de *modo oscuro*, *copia automática* y *notificaciones* se guardan en `localStorage` pero ningún otro código los lee: hoy no cambian nada.
 - Las carpetas `src/configuracion`, `src/logica`, `src/tipos` y `src/utilidades` (una reorganización en español) **no se importan desde la aplicación**; la app usa `constants/`, `services/` y `types/`. Están duplicadas y sin usar.
 - No hay cifrado del historial, sincronización ni exportación segura; no es un gestor de contraseñas.
 - No hay despliegue publicado; `docs/` contiene notas internas de reorganización, no una guía de despliegue.
 
+## 🤝 Contribuir
+
+¡Las contribuciones son bienvenidas! Leé la [guía de contribución](CONTRIBUTING.md) y el [código de conducta](CODE_OF_CONDUCT.md) antes de abrir un PR. Para bugs o ideas usá las [plantillas de issues](../../issues/new/choose); los problemas de seguridad se reportan según la [política de seguridad](SECURITY.md). ¿Dudas? Mirá [SUPPORT.md](SUPPORT.md). Los cambios por versión están en el [CHANGELOG](CHANGELOG.md).
+
 ## 📄 Licencia
 
-Sin licencia definida: todos los derechos reservados por defecto.
+Distribuido bajo la licencia MIT. Ver [LICENSE](LICENSE).
 
 <div align="center">
   <sub>Hecho por Luiss2080 · Generador de contraseñas del lado del cliente</sub>
